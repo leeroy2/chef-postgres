@@ -1,0 +1,33 @@
+{
+  "id": "postgresql-server",
+  "yum_package": {
+    "platforms": {
+      "centos": {
+        "x86_64": {
+          "redirect": "linux-64"
+        }
+      },
+      "redhat": {
+        "x86_64": {
+          "redirect": "linux-64"
+        }
+      }
+    }
+  },
+  "versions": {
+    "12.6.1": {
+      "linux-64": {
+	"extra_repos": {
+	  "postgres12": {
+	    "url": "https://download.postgresql.org/pub/repos/yum/12/redhat/rhel-$releasever-$basearch"
+	  }
+	},
+        "package_name": "postgresql12-server",
+        "package_version": "12.6-1PGDG.rhel7",
+        "package_alias": "postgresql12",
+        "package_locks": ["postgresql12*"],
+        "package_unlocks": ["postgresql12*"]
+      }
+    }
+  }
+}

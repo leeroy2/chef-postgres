@@ -1,0 +1,10 @@
+<%= node['postgres']['logs_dir'] %>/postgresql.log
+{
+    weekly
+    copytruncate
+    size 2000k
+    rotate 30
+    compress
+    dateext
+    dateformat -%Y-%m-%d-%s
+}

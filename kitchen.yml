@@ -1,0 +1,90 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 2048
+    cpus: 2
+
+provisioner:
+  name: chef_zero
+  product_name: chef
+  product_version: 12.16
+  data_bags_path: "test/integration/data_bags"
+  encrypted_data_bag_secret_key_path: "test/integration/encrypted_data_bag_secret"
+  roles_path: "test/integration/roles"
+  environments_path: "test/integration/environments"
+  log_level: info
+  client_rb:
+    environment: kitchen
+
+platforms:
+  - name: rhel7
+
+verifier:
+  name: inspec
+
+suites:
+- name: default
+  driver:
+    vm_hostname: postgres
+    network:
+      - ["private_network", {ip: '172.18.52.10'}]
+      - ["forwarded_port", {guest: 5432, guest_ip: '172.18.52.10', host: 5432, auto_correct: true}]
+  run_list:
+    - role[base]
+    - recipe[postgres]
+    - recipe[postgres::create_db]
+  verifier:
+    inspec_tests:
+      - path: test/suites/postgres
+    controls:
+      - installation
+      - ohai
+      - archive_log_off
+  attributes: 
+    postgres:
+      lvm:
+        configure: false    
+      tuning_properties:
+        shared_buffers: 1GB
+        maintenance_work_mem: 512MB
+        work_mem: 32MB
+- name: lvm
+  driver:
+    vm_hostname: postgres
+    network:
+      - ["private_network", {ip: '172.18.52.10'}]
+      - ["forwarded_port", {guest: 5432, guest_ip: '172.18.52.10', host: 5432, auto_correct: true}]
+    customize:
+      createhd:
+        - filename: '../../../../sdb-disk.vdi'
+          size: 40 * 1024
+        - filename: '../../../../sdc-disk.vdi'
+          size: 100 * 1024
+      storageattach:
+        - storagectl: 'SATA'
+          port: 1
+          device: 0
+          type: hdd
+          medium: '../../../../sdb-disk.vdi'
+        - storagectl: 'SATA'
+          port: 2
+          device: 0
+          type: hdd
+          medium: '../../../../sdc-disk.vdi'
+  run_list:
+    - role[base]
+    - recipe[postgres]
+    - recipe[postgres::create_db]
+  verifier:
+    inspec_tests:
+      - path: test/suites/postgres
+    controls:
+      - installation
+      - ohai
+      - archive_log_off
+  attributes: 
+
+
+
+

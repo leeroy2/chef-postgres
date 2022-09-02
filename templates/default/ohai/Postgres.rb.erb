@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+Ohai.plugin(:Postgres) do
+  provides "service/postgres"
+  depends "service"
+
+  collect_data(:default) do
+    Ohai::Log.info("Collecting postgres data")
+    service[:postgres] = Mash.new
+    service[:postgres][:host] = service['listen_address']
+    service[:postgres][:port] = '<%= node['postgres']['port'] %>'
+    service[:postgres][:jdbc_url] = "jdbc:postgresql://#{service['postgres']['host']}:#{service['postgres']['port']}"
+    service[:postgres][:databases] = Mash.new
+  end
+end

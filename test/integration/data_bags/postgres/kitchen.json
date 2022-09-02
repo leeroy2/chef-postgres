@@ -1,0 +1,17 @@
+{
+  "id": "kitchen",
+  "roles": {
+    "encrypted_data": "RJp9oxAC+YRFlR/ayRvYFOZKRPxpUKtMu4BDmBRDVPh6qQsi79xvoaYB1fUj\ndgHAcOp0EH9bhsvEmgTXvUZ0tsRWiNNfPu5GAXyD2oJUlz4SGEYRjf8ypgTh\nXjJYUJnsXG1hcTlK50NpAWzK\n",
+    "iv": "htVJG3IbA4qAy/0Z\n",
+    "auth_tag": "zRFb41kJBsRDx6iTMCMU5w==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  },
+  "databases": {
+    "encrypted_data": "YxkclfcILyMRRNXKh0/ZXxaz8or09kD6rJ9+N1xLKoZlBAoj9bs8ZvMmDlIe\nry742S93JbflvJMYdB+qX2f8jmCTX3I=\n",
+    "iv": "xvgSYocu4iaSyInl\n",
+    "auth_tag": "DdBsS4+IzTkq1IUSVqXVgw==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

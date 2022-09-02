@@ -1,0 +1,10 @@
+{
+  "id": "postgres",
+  "config": {
+    "encrypted_data": "7LenVUz8T1ZwfxhUa8AIRJ03yVBvlUcl5CSzb1TPBUwykcMOnMonfwLs/7+Y\naAJkYY7A5v9A7WvPFQTmUy90Ls6qB8eBeOLemDsyBR0eAeeUOusK7v6Ikcta\nVhedI3Z0TwC6qpQJH0nM65VCG15D+c4OVseRRszPr4e/VxOs4ucm7DeNvKuk\nnvH1KZjjwYfPpprv79zADWmKHEJBcGKudlVBWYjsWlsZ5wnu1/1GsOk=\n",
+    "iv": "NW08nNsg1B1avsSZ\n",
+    "auth_tag": "xIIYL2UDc+DizoCERtS8dA==\n",
+    "version": 3,
+    "cipher": "aes-256-gcm"
+  }
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export POSTGRES_HOME="<%= node['postgres']['path'] %>"
+export PGDATA="<%= node['postgres']['data_dir'] %>"
+export PATH="${POSTGRES_HOME}/bin:$PATH"

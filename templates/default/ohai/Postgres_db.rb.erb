@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+Ohai.plugin(:PostgresDB<%= @db_name %>) do
+  provides "service/postgres/databases/<%= @db_name %>"
+  depends "service/postgres"
+
+  collect_data(:default) do
+    Ohai::Log.info("Collecting postgres data")
+    database_name = '<%= @db_name %>'
+    service[:postgres][:databases][database_name] = Mash.new
+    service[:postgres][:databases][database_name][:schemas] = Mash.new
+    service[:postgres][:databases][database_name][:jdbc_url] = "#{service['postgres']['jdbc_url']}/#{database_name}"
+
+    service[:postgres][:databases][database_name][:schemas][:public] = Mash.new
+    service[:postgres][:databases][database_name][:schemas][:public][:jdbc_url] = "#{service['postgres']['databases'][database_name]['jdbc_url']}?currentSchema=public"
+
+    <% @schemas.each do |schema| -%>
+      service[:postgres][:databases][database_name][:schemas]['<%= schema %>'] = Mash.new
+      service[:postgres][:databases][database_name][:schemas]['<%= schema %>'][:jdbc_url] = "#{service['postgres']['databases'][database_name]['jdbc_url']}?currentSchema=<%= schema %>"
+    <% end -%>
+  end
+end

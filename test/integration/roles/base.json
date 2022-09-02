@@ -1,0 +1,32 @@
+{
+  "name": "base",
+  "description": "",
+  "json_class": "Chef::Role",
+  "override_attributes": {
+    "base_override": {
+      "ftp": {
+        "java_binaries": "java",
+        "hvault_binaries": "vault",
+        "jboss_binaries": "wildfly",
+        "ruby_binaries": "ruby",
+        "consul_binaries": "consul"
+      },
+      "ark": {
+        "prefix_home": "/opt/applications"
+      },
+      "chef": {
+        "vault": {
+          "version": "2.9.0"
+        },
+        "shadow": {
+          "version": "2.5.0"
+        }
+      }
+    }
+  },
+  "chef_type": "role",
+  "run_list": [
+  ],
+  "env_run_lists": {
+  }
+}
